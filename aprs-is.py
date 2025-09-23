@@ -5,11 +5,12 @@ logging.basicConfig(level=logging.INFO)
 
 # Define a callback function to handle each received packet
 def handle_packet(packet):
-    if packet.get('from') == target_callsign:
-        print(packet)
+    for c in target_callsign:
+        if packet.get('from') == c:
+            print(packet)
 
 # target callsign
-target_callsign = 'W1AW'
+target_callsign = ['ON6ZQ','KM6VOM']
 
 # Replace 'N0CALL' with your own amateur radio callsign, only if sending
 user_callsign = 'N0CALL'
@@ -24,7 +25,9 @@ try:
     # Establish the connection to the APRS-IS server
     print("Connecting...")
     ais.connect()
-    print(f"Searching for {target_callsign}")
+    print("Searching for: ")
+    for c in target_callsign:
+        print(f"{c}")
     
     # Start consuming packets. This runs indefinitely.
     # The `consumer` method will automatically parse each packet.
