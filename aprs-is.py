@@ -10,7 +10,7 @@ def handle_packet(packet):
             print(packet)
 
 # target callsign
-target_callsign = ['ON6ZQ','KM6VOM']
+target_callsign = ['ON6ZQ','W1AW']
 
 # Replace 'N0CALL' with your own amateur radio callsign, only if sending
 user_callsign = 'N0CALL'
