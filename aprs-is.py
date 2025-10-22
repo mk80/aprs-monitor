@@ -3,14 +3,17 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
+
 # Define a callback function to handle each received packet
+
 def handle_packet(packet):
     for c in target_callsign:
         if packet.get('from') == c:
             print(packet)
 
+
 # target callsign
-target_callsign = ['ON6ZQ','W1AW']
+target_callsign = ['ON6ZQ', 'KM6VOM']
 
 # Replace 'N0CALL' with your own amateur radio callsign, only if sending
 user_callsign = 'N0CALL'
@@ -18,7 +21,6 @@ user_callsign = 'N0CALL'
 try:
     # get passcode from my callsign
     #pcode = aprslib.passcode(user_callsign)
-    
     # create object
     ais = aprslib.IS(user_callsign)
 
@@ -28,7 +30,6 @@ try:
     print("Searching for: ")
     for c in target_callsign:
         print(f"{c}")
-    
     # Start consuming packets. This runs indefinitely.
     # The `consumer` method will automatically parse each packet.
     ais.consumer(handle_packet)
@@ -36,5 +37,8 @@ except aprslib.ParseError as e:
     print(f"Parse error: {e}")
 except Exception as e:
     print(f"Error: {e}")
-
+except KeyboardInterrupt:
+    print("\n user interrupt")
+finally:
+    exit
 
